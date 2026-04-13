@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Victor Militino — Desenvolvedor Fullstack</title>
+  <meta name="description" content="Portfólio de Victor Militino Santos Gonçalves, desenvolvedor fullstack baseado em Recife — PE."/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/sections.css"/>
+</head>
+<body>
+
+<!-- ── Cursor ── -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- ══════════════════════════════════════
+     NAV
+════════════════════════════════════════ -->
+<nav class="pnav">
+  <div class="pnav-right">
+    <ul class="pnav-links">
+      <li><a href="#sobre"    data-i18n="nav.about"></a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#exp"      data-i18n="nav.exp"></a></li>
+      <li><a href="#projetos" data-i18n="nav.proj"></a></li>
+      <li><a href="#formacao" data-i18n="nav.edu"></a></li>
+      <li><a href="#contato"  data-i18n="nav.contact"></a></li>
+    </ul>
+    <div class="lang-switcher">
+      <button class="lang-btn active" data-lang="pt">PT</button>
+      <button class="lang-btn"        data-lang="en">EN</button>
+      <button class="lang-btn"        data-lang="es">ES</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<section class="hero" id="inicio">
+  <div class="hero-grid"></div>
+  <div class="orb1 hero-orb"></div>
+  <div class="orb2 hero-orb"></div>
+
+  <div class="hero-inner container">
+    <div class="hero-layout">
+
+      <!-- texto -->
+      <div class="hero-text">
+        <div class="hero-tag" data-i18n="hero.tag"></div>
+        <h1 class="hero-name">Victor<br/><span>Militino</span></h1>
+        <p  class="hero-role" id="hrole"></p>
+        <p  class="hero-desc" data-i18n="hero.desc"></p>
+        <div class="hero-cta">
+          <a href="#contato"  class="btn-p" data-i18n="hero.cta1"></a>
+          <a href="#projetos" class="btn-o" data-i18n="hero.cta2"></a>
+        </div>
+      </div>
+
+      <!-- foto -->
+      <div class="hero-photo-wrap">
+        <div class="hero-photo-ring"></div>
+        <div class="hero-photo">
+          <img src="assets/foto.png" alt="Victor Militino" id="heroImg"
+               onerror="this.style.display='none';document.getElementById('heroInitials').style.display='flex'"/>
+          <div class="hero-initials" id="heroInitials">VM</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>scroll</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SOBRE
+════════════════════════════════════════ -->
+<section class="sec" id="sobre">
+  <div class="container">
+    <div class="about-grid">
+
+      <div class="about-text fade-left">
+        <div class="sec-label" data-i18n="about.label"></div>
+        <div class="sec-title" data-i18n="about.title"></div>
+        <p data-i18n="about.p1"></p>
+        <p data-i18n="about.p2"></p>
+        <p data-i18n="about.p3"></p>
+      </div>
+
+      <div class="stats-grid fade-right">
+        <div class="stat"><div class="stat-n">5+</div><div class="stat-l" data-i18n="about.s1"></div></div>
+        <div class="stat"><div class="stat-n">10+</div><div class="stat-l" data-i18n="about.s2"></div></div>
+        <div class="stat"><div class="stat-n">3</div><div class="stat-l"  data-i18n="about.s3"></div></div>
+        <div class="stat"><div class="stat-n">2x</div><div class="stat-l" data-i18n="about.s4"></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SKILLS
+════════════════════════════════════════ -->
+<section class="sec sec-alt" id="skills">
+  <div class="container">
+    <div class="sec-label fade-up" data-i18n="skills.label"></div>
+    <div class="sec-title fade-up" data-i18n="skills.title"></div>
+
+    <div class="skills-grid">
+      <div class="skill-cat fade-up" style="transition-delay:.00s">
+        <div class="skill-cat-icon">⚡</div>
+        <div class="skill-cat-title" data-i18n="skills.lang"></div>
+        <div class="tags">
+          <span class="tag">Java</span><span class="tag">Python</span>
+          <span class="tag">JavaScript</span><span class="tag">TypeScript</span><span class="tag">SQL</span>
+        </div>
+      </div>
+      <div class="skill-cat fade-up" style="transition-delay:.08s">
+        <div class="skill-cat-icon">🔧</div>
+        <div class="skill-cat-title">Frameworks</div>
+        <div class="tags">
+          <span class="tag">Spring Boot</span><span class="tag">React.js</span>
+          <span class="tag">Node.js</span><span class="tag">Bootstrap</span>
+        </div>
+      </div>
+      <div class="skill-cat devops-focus fade-up" style="transition-delay:.16s">
+        <div class="skill-cat-icon">🛠️</div>
+        <div class="skill-cat-title" data-i18n="skills.devops"></div>
+        <div class="tags">
+          <span class="tag">Docker</span><span class="tag">Kubernetes</span>
+          <span class="tag">Terraform</span><span class="tag">AWS</span>
+          <span class="tag">CI/CD</span><span class="tag">Git</span>
+        </div>
+        <div class="devops-badge" data-i18n="skills.devops.badge"></div>
+      </div>
+      <div class="skill-cat fade-up" style="transition-delay:.24s">
+        <div class="skill-cat-icon">🧪</div>
+        <div class="skill-cat-title" data-i18n="skills.test"></div>
+        <div class="tags">
+          <span class="tag">Selenium</span><span class="tag">Cypress</span>
+          <span class="tag">Python Scripting</span>
+        </div>
+      </div>
+      <div class="skill-cat fade-up" style="transition-delay:.32s">
+        <div class="skill-cat-icon">🗄️</div>
+        <div class="skill-cat-title" data-i18n="skills.db"></div>
+        <div class="tags">
+          <span class="tag">MySQL</span><span class="tag">PostgreSQL</span><span class="tag">MaxDB</span>
+        </div>
+      </div>
+      <div class="skill-cat fade-up" style="transition-delay:.40s">
+        <div class="skill-cat-icon">🎨</div>
+        <div class="skill-cat-title" data-i18n="skills.tools"></div>
+        <div class="tags">
+          <span class="tag">Figma</span><span class="tag">Power BI</span>
+          <span class="tag">Scrum/Kanban</span><span class="tag">VS Code</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     EXPERIÊNCIA
+════════════════════════════════════════ -->
+<section class="sec" id="exp">
+  <div class="container">
+    <div class="sec-label fade-up" data-i18n="exp.label"></div>
+    <div class="sec-title fade-up" data-i18n="exp.title"></div>
+
+    <div class="timeline">
+
+      <!-- Rise-Up -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">FEV 2025 — JUN 2025</div>
+        <div class="tl-company">Residência Porto Digital — Rise-Up</div>
+        <div class="tl-role"  data-i18n="exp.e1.role"></div>
+        <ul class="tl-list">
+          <li data-i18n="exp.e1.l1"></li>
+          <li data-i18n="exp.e1.l2"></li>
+          <li data-i18n="exp.e1.l3"></li>
+          <li data-i18n="exp.e1.l4"></li>
+        </ul>
+        <span class="tl-badge">React · Node.js · Agile</span>
+      </div>
+
+      <!-- Kick-off -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">AGO 2024 — DEZ 2024</div>
+        <div class="tl-company">Residência Porto Digital — Kick-off</div>
+        <div class="tl-role"  data-i18n="exp.e2.role"></div>
+        <ul class="tl-list">
+          <li data-i18n="exp.e2.l1"></li>
+          <li data-i18n="exp.e2.l2"></li>
+        </ul>
+        <span class="tl-badge" data-i18n="exp.e2.badge"></span>
+      </div>
+
+      <!-- Lab Edmar -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">JAN 2019 — MAR 2019</div>
+        <div class="tl-company">Laboratório Edmar Victor</div>
+        <div class="tl-role"  data-i18n="exp.e3.role"></div>
+        <ul class="tl-list">
+          <li data-i18n="exp.e3.l1"></li>
+          <li data-i18n="exp.e3.l2"></li>
+        </ul>
+        <span class="tl-badge">Power BI · MaxDB · Analytics</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     PROJETOS
+════════════════════════════════════════ -->
+<section class="sec sec-alt" id="projetos">
+  <div class="container">
+    <div class="sec-label fade-up" data-i18n="proj.label"></div>
+    <div class="sec-title fade-up" data-i18n="proj.title"></div>
+
+    <div class="proj-filter fade-up">
+      <button class="flt on" onclick="filterProj('all',this)"      data-i18n="proj.f.all"></button>
+      <button class="flt"    onclick="filterProj('personal',this)" data-i18n="proj.f.personal"></button>
+      <button class="flt"    onclick="filterProj('academic',this)" data-i18n="proj.f.academic"></button>
+    </div>
+
+    <div class="proj-grid">
+
+      <!-- AlertaFebre -->
+      <div class="proj-card fade-up" data-cat="personal" style="transition-delay:.00s">
+        <div class="proj-top">
+          <div class="proj-head">
+            <span class="proj-type typ-p" data-i18n="proj.f.personal"></span>
+            <span class="proj-badge">PWA</span>
+          </div>
+          <div class="proj-name">🌡️ AlertaFebre</div>
+          <div class="proj-sub"    data-i18n="proj.p1.sub"></div>
+          <div class="proj-status"><div class="sdot wip"></div><span data-i18n="proj.wip"></span></div>
+          <p class="proj-desc"     data-i18n="proj.p1.desc"></p>
+          <ul class="proj-feats">
+            <li data-i18n="proj.p1.f1"></li>
+            <li data-i18n="proj.p1.f2"></li>
+            <li data-i18n="proj.p1.f3"></li>
+            <li data-i18n="proj.p1.f4"></li>
+            <li data-i18n="proj.p1.f5"></li>
+          </ul>
+        </div>
+        <div class="proj-bottom">
+          <div class="stack">
+            <span class="stag">React JS</span><span class="stag">PWA</span>
+            <span class="stag">Geolocation API</span><span class="stag">JavaScript</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://lnkd.in/d9gE9UWM" target="_blank" class="pl-btn pri" data-i18n="proj.p1.cta"></a>
+            <a href="https://github.com/victormilitino" target="_blank" class="pl-btn sec">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- PsicoPro -->
+      <div class="proj-card fade-up" data-cat="academic" style="transition-delay:.1s">
+        <div class="proj-top">
+          <div class="proj-head">
+            <span class="proj-type typ-a" data-i18n="proj.academic_porto"></span>
+            <span class="proj-badge">🏆 Top 10</span>
+          </div>
+          <div class="proj-name">🧠 PsicoPro</div>
+          <div class="proj-sub"    data-i18n="proj.p2.sub"></div>
+          <div class="proj-status"><div class="sdot"></div><span data-i18n="proj.p2.status"></span></div>
+          <div class="award-box">🏆 <span data-i18n="proj.p2.award"></span></div>
+          <p class="proj-desc"     data-i18n="proj.p2.desc"></p>
+          <ul class="proj-feats">
+            <li data-i18n="proj.p2.f1"></li>
+            <li data-i18n="proj.p2.f2"></li>
+            <li data-i18n="proj.p2.f3"></li>
+            <li data-i18n="proj.p2.f4"></li>
+            <li data-i18n="proj.p2.f5"></li>
+          </ul>
+        </div>
+        <div class="proj-bottom">
+          <div class="stack">
+            <span class="stag">React</span><span class="stag">Node.js</span>
+            <span class="stag">JavaScript</span><span class="stag">Bootstrap</span><span class="stag">Scrum</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/victormilitino" target="_blank" class="pl-btn pri">GitHub →</a>
+            <a href="https://www.linkedin.com/in/victor-militino-3bba811ba/" target="_blank" class="pl-btn sec">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SisOOC -->
+      <div class="proj-card fade-up" data-cat="academic" style="transition-delay:.2s">
+        <div class="proj-top">
+          <div class="proj-head">
+            <span class="proj-type typ-a" data-i18n="proj.f.academic"></span>
+          </div>
+          <div class="proj-name">🚒 SisOOC</div>
+          <div class="proj-sub"    data-i18n="proj.p3.sub"></div>
+          <div class="proj-status"><div class="sdot"></div><span data-i18n="proj.done"></span></div>
+          <p class="proj-desc"     data-i18n="proj.p3.desc"></p>
+          <ul class="proj-feats">
+            <li data-i18n="proj.p3.f1"></li>
+            <li data-i18n="proj.p3.f2"></li>
+            <li data-i18n="proj.p3.f3"></li>
+            <li data-i18n="proj.p3.f4"></li>
+          </ul>
+        </div>
+        <div class="proj-bottom">
+          <div class="stack">
+            <span class="stag">Java</span><span class="stag">Spring Boot</span>
+            <span class="stag">SQL</span><span class="stag">React</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/victormilitino" target="_blank" class="pl-btn pri">GitHub →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     FORMAÇÃO
+════════════════════════════════════════ -->
+<section class="sec" id="formacao">
+  <div class="container">
+    <div class="sec-label fade-up" data-i18n="edu.label"></div>
+    <div class="sec-title fade-up" data-i18n="edu.title"></div>
+
+    <div class="edu-grid">
+      <div class="edu-card fade-up" style="transition-delay:.00s">
+        <div class="edu-type"   data-i18n="edu.c1.type"></div>
+        <div class="edu-name">Faculdade Senac</div>
+        <div class="edu-course" data-i18n="edu.c1.course"></div>
+        <div class="edu-year">2024 – 2026</div>
+      </div>
+      <div class="edu-card fade-up" style="transition-delay:.1s">
+        <div class="edu-type"   data-i18n="edu.c2.type"></div>
+        <div class="edu-name"   data-i18n="edu.c2.name"></div>
+        <div class="edu-course">Yázigi &amp; CNA</div>
+        <div class="edu-year"   data-i18n="edu.c2.year"></div>
+      </div>
+    </div>
+
+    <div class="sec-label fade-up" style="margin-bottom:.85rem" data-i18n="edu.lang"></div>
+    <div class="lang-row fade-up">
+      <div class="lang-card">
+        <div class="lang-nm">🇧🇷 Português</div>
+        <div class="lang-lv" data-i18n="edu.native"></div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-nm">🇺🇸 Inglês / English</div>
+        <div class="lang-lv" data-i18n="edu.intermediate"></div>
+        <div class="lang-sc">Yázigi &amp; CNA</div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-nm">🇪🇸 Espanhol / Spanish</div>
+        <div class="lang-lv" data-i18n="edu.advanced"></div>
+        <div class="lang-sc">Yázigi</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CONTATO
+════════════════════════════════════════ -->
+<section class="sec sec-alt" id="contato">
+  <div class="container">
+    <div class="contact-grid">
+
+      <div class="fade-left">
+        <div class="sec-label" data-i18n="contact.label"></div>
+        <div class="contact-h" data-i18n="contact.title"></div>
+        <p class="contact-sub" data-i18n="contact.sub"></p>
+        <div class="clinks">
+          <a href="mailto:victor.militino@gmail.com" class="cl">
+            <div class="cl-icon">✉</div>victor.militino@gmail.com
+          </a>
+          <a href="https://wa.me/5581997539984" target="_blank" class="cl">
+            <div class="cl-icon">📱</div>(81) 9.9753-9984
+          </a>
+          <a href="https://www.linkedin.com/in/victor-militino-3bba811ba/" target="_blank" class="cl">
+            <div class="cl-icon">in</div>LinkedIn — Victor Militino
+          </a>
+          <a href="https://github.com/victormilitino" target="_blank" class="cl">
+            <div class="cl-icon">GH</div>github.com/victormilitino
+          </a>
+          <span class="cl" style="cursor:default">
+            <div class="cl-icon">📍</div>Recife — PE, Brasil
+          </span>
+        </div>
+      </div>
+
+      <div class="fade-right">
+        <div class="cform">
+          <div class="fg">
+            <label class="flb" data-i18n="contact.fname"></label>
+            <input  class="fi" type="text"  data-i18n-ph="contact.fnameph"/>
+          </div>
+          <div class="fg">
+            <label class="flb">E-mail</label>
+            <input  class="fi" type="email" placeholder="seu@email.com"/>
+          </div>
+          <div class="fg">
+            <label class="flb" data-i18n="contact.fmsg"></label>
+            <textarea class="fta" data-i18n-ph="contact.fmsgph"></textarea>
+          </div>
+          <button class="btn-p" id="sendbtn" style="width:100%;text-align:center" data-i18n="contact.send"></button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer>
+  <span>Victor Militino</span> Santos Gonçalves ·
+  <span data-i18n="footer.role"></span> ·
+  Recife — PE · 2025
+</footer>
+
+<!-- ── Scripts (ordem importa) ── -->
+<script src="data/i18n.js"></script>
+<script src="js/lang.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Victor Militino — Desenvolvedor Fullstack</title>
+  <meta name="description" content="Portfólio de Victor Militino Santos Gonçalves, desenvolvedor fullstack baseado em Recife — PE."/>
+<style>
+/* =========================================
+   portfolio · Victor Militino
+   css/style.css
+   ========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,500;0,9..40,600;1,9..40,300&display=swap');
+
+/* ── Reset & Tokens ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --a:   #7c6aff;
+  --a2:  #ff6b8a;
+  --a3:  #2dd4bf;
+  --t:   #e8e6ff;
+  --t2:  #9b97c0;
+  --bg:  #0a0a0f;
+  --bg2: #12121a;
+  --bg3: #1a1a26;
+  --bd:  rgba(124, 106, 255, 0.18);
+  --glow:rgba(124, 106, 255, 0.25);
+  --mono: 'Space Mono', monospace;
+  --sans: 'DM Sans', sans-serif;
+}
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--t);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── Custom Cursor ── */
+#cursor {
+  width: 12px; height: 12px;
+  background: var(--a);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform .15s ease, opacity .3s;
+}
+#cursor-ring {
+  width: 36px; height: 36px;
+  border: 1.5px solid var(--a);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform .35s ease, width .3s, height .3s, opacity .3s;
+  opacity: 0.5;
+}
+@media (max-width: 768px) {
+  body { cursor: auto; }
+  #cursor, #cursor-ring { display: none; }
+}
+
+/* ── Nav ── */
+.pnav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1rem 2rem;
+  background: rgba(10, 10, 15, 0.92);
+  border-bottom: 1px solid var(--bd);
+  position: sticky; top: 0;
+  z-index: 100;
+  backdrop-filter: blur(16px);
+  transition: background .3s;
+}
+.pnav-logo {
+  font-family: var(--mono);
+  color: var(--a);
+  font-size: .9rem;
+}
+.pnav-right { display: flex; align-items: center; gap: 1.75rem; }
+.pnav-links { display: flex; gap: 1.5rem; list-style: none; }
+.pnav-links a {
+  color: var(--t2);
+  text-decoration: none;
+  font-size: .8rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  transition: color .2s;
+  position: relative;
+}
+.pnav-links a::after {
+  content: '';
+  position: absolute; bottom: -4px; left: 0; right: 0;
+  height: 1px;
+  background: var(--a);
+  transform: scaleX(0);
+  transition: transform .3s;
+  transform-origin: left;
+}
+.pnav-links a:hover { color: var(--t); }
+.pnav-links a:hover::after { transform: scaleX(1); }
+
+/* Language switcher */
+.lang-switcher { display: flex; gap: 4px; }
+.lang-btn {
+  padding: .3rem .55rem;
+  background: transparent;
+  border: 1px solid var(--bd);
+  color: var(--t2);
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .06em;
+  cursor: pointer;
+  transition: all .2s;
+  line-height: 1;
+}
+.lang-btn:hover { border-color: var(--a); color: var(--a); }
+.lang-btn.active {
+  background: rgba(124, 106, 255, .15);
+  border-color: var(--a);
+  color: var(--a);
+}
+
+/* ── Layout Helpers ── */
+.sec { padding: 5rem 2rem; }
+.sec-alt { background: var(--bg2); }
+.container { max-width: 1060px; margin: 0 auto; }
+
+.sec-label {
+  font-family: var(--mono);
+  font-size: .72rem;
+  color: var(--a);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  margin-bottom: .6rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.sec-label::before { content: '//'; opacity: .5; }
+
+.sec-title {
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 600;
+  letter-spacing: -.02em;
+  line-height: 1.1;
+  margin-bottom: 2.5rem;
+}
+.sec-title em { font-style: italic; font-weight: 300; color: var(--t2); }
+
+/* ── Scroll Animations ── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .65s ease, transform .65s ease;
+}
+.fade-left {
+  opacity: 0;
+  transform: translateX(-28px);
+  transition: opacity .65s ease, transform .65s ease;
+}
+.fade-right {
+  opacity: 0;
+  transform: translateX(28px);
+  transition: opacity .65s ease, transform .65s ease;
+}
+.fade-up.visible,
+.fade-left.visible,
+.fade-right.visible { opacity: 1; transform: none; }
+
+/* ── Buttons ── */
+.btn-p {
+  padding: .75rem 1.75rem;
+  background: var(--a);
+  color: #fff;
+  border: none;
+  font-family: var(--mono);
+  font-size: .78rem;
+  letter-spacing: .08em;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all .2s;
+}
+.btn-p:hover { background: #9b8fff; transform: translateY(-2px); box-shadow: 0 8px 28px var(--glow); }
+.btn-o {
+  padding: .75rem 1.75rem;
+  background: transparent;
+  color: var(--t);
+  border: 1px solid var(--bd);
+  font-family: var(--mono);
+  font-size: .78rem;
+  letter-spacing: .08em;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all .2s;
+}
+.btn-o:hover { border-color: var(--a); color: var(--a); transform: translateY(-2px); }
+
+@media (max-width: 768px) {
+  .pnav-links { display: none; }
+}
+
+/* =========================================
+   portfolio · Victor Militino
+   css/sections.css
+   ========================================= */
+
+/* ── Hero ── */
+.hero {
+  min-height: 100vh;
+  padding: 5rem 2rem 4rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #0a0a0f 0%, #0f0e1a 100%);
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(124,106,255,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124,106,255,.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 100%);
+  pointer-events: none;
+}
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  transition: transform .08s ease-out;
+}
+.orb1 { width: 420px; height: 420px; background: rgba(124,106,255,.1); top: -100px; right: -80px; }
+.orb2 { width: 260px; height: 260px; background: rgba(255,107,138,.07); bottom: 0; left: 30%; }
+.hero-inner { position: relative; z-index: 2; max-width: 720px; }
+
+.hero-tag {
+  font-family: var(--mono);
+  font-size: .72rem;
+  color: var(--a);
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+.hero-tag::before { content: ''; width: 28px; height: 1px; background: var(--a); display: inline-block; }
+
+h1.hero-name {
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 600;
+  line-height: .95;
+  letter-spacing: -.03em;
+  margin-bottom: .5rem;
+}
+h1.hero-name span {
+  background: linear-gradient(135deg, var(--a), var(--a2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-role {
+  font-size: 1.1rem;
+  color: var(--t2);
+  font-weight: 300;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  min-height: 1.8rem;
+}
+.hero-desc {
+  font-size: .98rem;
+  color: var(--t2);
+  line-height: 1.7;
+  max-width: 520px;
+  margin-bottom: 2rem;
+}
+.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  color: var(--t2); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
+  font-family: var(--mono);
+  animation: bounce 2.2s infinite;
+}
+.scroll-line { width: 1px; height: 36px; background: linear-gradient(to bottom, var(--a), transparent); }
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(6px); }
+}
+
+/* ── About ── */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.about-text p { font-size: .98rem; color: var(--t2); line-height: 1.8; margin-bottom: 1.1rem; }
+.about-text p strong { color: var(--t); font-weight: 500; }
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+.stat {
+  background: var(--bg3);
+  border: 1px solid var(--bd);
+  padding: 1.25rem;
+  position: relative;
+  transition: all .3s;
+}
+.stat::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: linear-gradient(to bottom, var(--a), var(--a2));
+}
+.stat:hover { border-color: var(--a); transform: translateY(-3px); box-shadow: 0 10px 30px var(--glow); }
+.stat-n { font-family: var(--mono); font-size: 2rem; font-weight: 700; color: var(--a); line-height: 1; margin-bottom: .3rem; }
+.stat-l { font-size: .8rem; color: var(--t2); }
+
+/* ── Skills ── */
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+.skill-cat {
+  background: var(--bg3);
+  border: 1px solid var(--bd);
+  padding: 1.75rem;
+  transition: all .3s;
+  position: relative; overflow: hidden;
+}
+.skill-cat::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(124,106,255,.04), transparent);
+  opacity: 0; transition: opacity .3s;
+}
+.skill-cat:hover { border-color: rgba(124,106,255,.4); }
+.skill-cat:hover::after { opacity: 1; }
+.skill-cat-icon { font-size: 1.3rem; margin-bottom: .75rem; }
+.skill-cat-title {
+  font-family: var(--mono);
+  font-size: .75rem;
+  letter-spacing: .1em;
+  color: var(--a);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+.tag {
+  padding: .28rem .7rem;
+  background: rgba(124,106,255,.08);
+  border: 1px solid rgba(124,106,255,.2);
+  color: var(--t2);
+  font-size: .8rem;
+  transition: all .2s;
+  cursor: default;
+}
+.tag:hover { background: rgba(124,106,255,.15); color: var(--t); border-color: var(--a); }
+
+/* ── Timeline (Experience) ── */
+.timeline { position: relative; padding-left: 1.75rem; }
+.timeline::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--a), rgba(124,106,255,.08));
+}
+.tl-item {
+  position: relative;
+  padding: 0 0 3rem 2.5rem;
+  opacity: 0; transform: translateX(-20px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.tl-item.visible { opacity: 1; transform: none; }
+.tl-dot {
+  position: absolute; left: -1.85rem; top: 4px;
+  width: 13px; height: 13px;
+  background: var(--bg);
+  border: 2px solid var(--a);
+  border-radius: 50%;
+  transition: all .3s;
+}
+.tl-item:hover .tl-dot { background: var(--a); box-shadow: 0 0 0 5px rgba(124,106,255,.2); }
+.tl-date  { font-family: var(--mono); font-size: .72rem; color: var(--a); letter-spacing: .1em; margin-bottom: .4rem; }
+.tl-company { font-size: 1.1rem; font-weight: 600; margin-bottom: .2rem; }
+.tl-role  { font-size: .87rem; color: var(--t2); font-style: italic; margin-bottom: .8rem; }
+.tl-list  { list-style: none; font-size: .9rem; color: var(--t2); line-height: 1.7; }
+.tl-list li { padding-left: 1.1rem; position: relative; margin-bottom: .35rem; }
+.tl-list li::before { content: '→'; position: absolute; left: 0; color: var(--a); font-size: .75rem; }
+.tl-badge {
+  display: inline-flex; margin-top: .65rem;
+  padding: .22rem .7rem;
+  background: rgba(45,212,191,.1); border: 1px solid rgba(45,212,191,.3);
+  color: var(--a3); font-size: .75rem; font-family: var(--mono); letter-spacing: .05em;
+}
+
+/* ── Projects ── */
+.proj-filter { display: flex; gap: .6rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.flt {
+  padding: .4rem 1.1rem;
+  background: transparent;
+  border: 1px solid var(--bd);
+  color: var(--t2);
+  font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;
+  cursor: pointer; transition: all .2s;
+}
+.flt:hover, .flt.on { background: rgba(124,106,255,.12); border-color: var(--a); color: var(--a); }
+
+.proj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; }
+.proj-card {
+  background: var(--bg2);
+  border: 1px solid var(--bd);
+  display: flex; flex-direction: column;
+  transition: all .35s;
+}
+.proj-card:hover {
+  border-color: rgba(124,106,255,.45);
+  transform: translateY(-5px);
+  box-shadow: 0 18px 50px rgba(0,0,0,.4);
+}
+.proj-top  { padding: 1.75rem 1.75rem 1.25rem; flex: 1; }
+.proj-head { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: .85rem; gap: .75rem; }
+.proj-type {
+  font-family: var(--mono); font-size: .65rem; letter-spacing: .12em; text-transform: uppercase;
+  padding: .25rem .65rem; border-radius: 1px;
+}
+.typ-p { background: rgba(255,107,138,.1); border: 1px solid rgba(255,107,138,.3); color: var(--a2); }
+.typ-a { background: rgba(45,212,191,.1);  border: 1px solid rgba(45,212,191,.3);  color: var(--a3); }
+.proj-badge {
+  font-family: var(--mono); font-size: .65rem; color: var(--a);
+  background: rgba(124,106,255,.1); border: 1px solid rgba(124,106,255,.22);
+  padding: .18rem .55rem; white-space: nowrap;
+}
+.proj-name { font-size: 1.2rem; font-weight: 600; letter-spacing: -.02em; margin-bottom: .4rem; }
+.proj-sub  { font-size: .8rem; color: var(--a); font-family: var(--mono); margin-bottom: .85rem; }
+.proj-status { display: flex; align-items: center; gap: .5rem; font-size: .78rem; color: var(--t2); margin-bottom: .85rem; }
+.sdot { width: 7px; height: 7px; border-radius: 50%; background: var(--a3); animation: pulse 2s infinite; }
+.sdot.wip { background: var(--a2); }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+.award-box {
+  display: flex; align-items: flex-start; gap: .6rem;
+  padding: .75rem;
+  background: rgba(124,106,255,.07); border: 1px solid rgba(124,106,255,.2);
+  margin-bottom: .85rem; font-size: .82rem; color: var(--t2); line-height: 1.5;
+}
+.proj-desc  { font-size: .88rem; color: var(--t2); line-height: 1.7; margin-bottom: 1rem; }
+.proj-feats { list-style: none; font-size: .85rem; color: var(--t2); margin-bottom: .5rem; }
+.proj-feats li { padding-left: 1rem; position: relative; margin-bottom: .3rem; }
+.proj-feats li::before { content: '✓'; position: absolute; left: 0; color: var(--a3); font-size: .72rem; }
+.proj-bottom { padding: 1.25rem 1.75rem; border-top: 1px solid var(--bd); display: flex; flex-direction: column; gap: .85rem; }
+.stack { display: flex; flex-wrap: wrap; gap: .35rem; }
+.stag { padding: .22rem .65rem; background: rgba(124,106,255,.06); border: 1px solid rgba(124,106,255,.15); color: var(--t2); font-size: .75rem; }
+.proj-links { display: flex; gap: .65rem; flex-wrap: wrap; }
+.pl-btn { padding: .5rem 1.1rem; font-family: var(--mono); font-size: .72rem; letter-spacing: .06em; text-decoration: none; transition: all .2s; cursor: pointer; }
+.pl-btn.pri { background: var(--a); color: #fff; border: none; }
+.pl-btn.pri:hover { background: #9b8fff; }
+.pl-btn.sec { background: transparent; color: var(--t2); border: 1px solid var(--bd); }
+.pl-btn.sec:hover { border-color: var(--a); color: var(--a); }
+
+/* ── Education ── */
+.edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin-bottom: 3rem; }
+.edu-card {
+  background: var(--bg3); border: 1px solid var(--bd); padding: 1.75rem;
+  transition: all .3s; position: relative; overflow: hidden;
+}
+.edu-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--a), var(--a2));
+  transform: scaleX(0); transform-origin: left; transition: transform .4s;
+}
+.edu-card:hover { border-color: rgba(124,106,255,.4); transform: translateY(-3px); }
+.edu-card:hover::after { transform: scaleX(1); }
+.edu-type   { font-family: var(--mono); font-size: .68rem; letter-spacing: .12em; color: var(--a); text-transform: uppercase; margin-bottom: .65rem; }
+.edu-name   { font-size: 1rem; font-weight: 600; margin-bottom: .2rem; }
+.edu-course { font-size: .87rem; color: var(--t2); margin-bottom: .4rem; }
+.edu-year   { font-family: var(--mono); font-size: .75rem; color: var(--t2); }
+
+/* Language cards */
+.lang-row { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+.lang-card {
+  background: var(--bg2); border: 1px solid var(--bd);
+  padding: 1.25rem 1.75rem; flex: 1; min-width: 160px; transition: all .3s;
+}
+.lang-card:hover { border-color: var(--a); transform: translateY(-3px); }
+.lang-nm { font-size: 1rem; font-weight: 600; margin-bottom: .3rem; }
+.lang-lv { font-size: .8rem; color: var(--a); font-family: var(--mono); }
+.lang-sc { font-size: .78rem; color: var(--t2); }
+
+/* ── Contact ── */
+.contact-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: start; }
+.contact-h {
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 600; line-height: 1.1; letter-spacing: -.02em; margin-bottom: 1.25rem;
+}
+.contact-h span {
+  background: linear-gradient(135deg, var(--a), var(--a2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.contact-sub { font-size: .95rem; color: var(--t2); line-height: 1.7; margin-bottom: 1.75rem; }
+.clinks { display: flex; flex-direction: column; gap: .85rem; }
+.cl {
+  display: flex; align-items: center; gap: .85rem;
+  padding: .85rem 1.1rem;
+  background: var(--bg2); border: 1px solid var(--bd);
+  color: var(--t2); text-decoration: none; font-size: .88rem; transition: all .3s;
+}
+.cl:hover { border-color: var(--a); color: var(--t); padding-left: 1.6rem; background: rgba(124,106,255,.05); }
+.cl-icon {
+  width: 30px; height: 30px;
+  background: rgba(124,106,255,.1); border: 1px solid rgba(124,106,255,.2);
+  display: flex; align-items: center; justify-content: center; font-size: .85rem; flex-shrink: 0;
+}
+.cform { display: flex; flex-direction: column; gap: .85rem; }
+.fg    { display: flex; flex-direction: column; gap: .4rem; }
+.flb   { font-family: var(--mono); font-size: .7rem; color: var(--a); letter-spacing: .1em; text-transform: uppercase; }
+.fi, .fta {
+  background: var(--bg2); border: 1px solid var(--bd); color: var(--t);
+  padding: .8rem .95rem; font-family: var(--sans); font-size: .92rem; outline: none;
+  transition: border-color .2s; resize: vertical;
+}
+.fi:focus, .fta:focus { border-color: var(--a); }
+.fi::placeholder, .fta::placeholder { color: var(--t2); opacity: .5; }
+.fta { min-height: 120px; }
+
+/* ── Footer ── */
+footer {
+  padding: 1.75rem;
+  text-align: center;
+  border-top: 1px solid var(--bd);
+  font-family: var(--mono); font-size: .72rem; color: var(--t2); letter-spacing: .05em;
+}
+footer span { color: var(--a); }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero { min-height: auto; padding: 6rem 1.5rem 4rem; }
+}
+
+/* ── Hero layout with photo ── */
+.hero-layout {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 4rem;
+}
+.hero-text { display: flex; flex-direction: column; }
+
+/* Photo wrapper */
+.hero-photo-wrap {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  flex-shrink: 0;
+}
+
+/* Rotating dashed ring */
+.hero-photo-ring {
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(124,106,255,.45);
+  animation: spin 18s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Photo circle */
+.hero-photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(124,106,255,.35);
+  background: var(--bg3);
+  position: relative;
+  box-shadow: 0 0 40px rgba(124,106,255,.18), 0 0 0 6px rgba(124,106,255,.07);
+}
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* Fallback initials */
+.hero-initials {
+  display: none;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--a);
+  background: linear-gradient(135deg, var(--bg3), var(--bg2));
+}
+
+/* Camera button */
+.photo-hint {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 38px;
+  height: 38px;
+  background: var(--a);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all .2s;
+  box-shadow: 0 4px 16px rgba(0,0,0,.4);
+  z-index: 2;
+}
+.photo-hint:hover { transform: scale(1.1); background: #9b8fff; }
+.photo-hint-icon { font-size: 1rem; line-height: 1; }
+
+@media (max-width: 860px) {
+  .hero-layout {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+  .hero-photo-wrap {
+    width: 180px;
+    height: 180px;
+    order: -1;
+  }
+  .hero-initials { font-size: 2rem; }
+  .hero-tag { justify-content: center; }
+  .hero-cta { justify-content: center; }
+}
+
+/* ── DevOps focus highlight ── */
+.skill-cat.devops-focus {
+  border-color: rgba(124,106,255,.4);
+  position: relative;
+}
+.skill-cat.devops-focus::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--a), var(--a2));
+}
+.devops-badge {
+  display: inline-block;
+  margin-top: .85rem;
+  padding: .25rem .75rem;
+  background: rgba(124,106,255,.1);
+  border: 1px solid rgba(124,106,255,.3);
+  color: var(--a);
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+</style>
+</head>
+<body>
+
+<!-- ── Cursor ── -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- ══════════════════════════════════════
+     NAV
+════════════════════════════════════════ -->
+<nav class="pnav">
+  <div class="pnav-right">
+    <ul class="pnav-links">
+      <li><a href="#sobre"    data-i18n="nav.about"></a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#exp"      data-i18n="nav.exp"></a></li>
+      <li><a href="#projetos" data-i18n="nav.proj"></a></li>
+      <li><a href="#formacao" data-i18n="nav.edu"></a></li>
+      <li><a href="#contato"  data-i18n="nav.contact"></a></li>
+    </ul>
+    <div class="lang-switcher">
+      <button class="lang-btn active" data-lang="pt">PT</button>
+      <button class="lang-btn"        data-lang="en">EN</button>
+      <button class="lang-btn"        data-lang="es">ES</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<section class="hero" id="inicio">
+  <div class="hero-grid"></div>
+  <div class="orb1 hero-orb"></div>
+  <div class="orb2 hero-orb"></div>
+
+  <div class="hero-inner container">
+    <div class="hero-layout">
+
+      <!-- texto -->
+      <div class="hero-text">
+        <div class="hero-tag" data-i18n="hero.tag"></div>
+        <h1 class="hero-name">Victor<br/><span>Militino</span></h1>
+        <p  class="hero-role" id="hrole"></p>
+        <p  class="hero-desc" data-i18n="hero.desc"></p>
+        <div class="hero-cta">
+          <a href="#contato"  class="btn-p" data-i18n="hero.cta1"></a>
+          <a href="#projetos" class="btn-o" data-i18n="hero.cta2"></a>
+        </div>
+      </div>
+
+      <!-- foto -->
+      <div class="hero-photo-wrap">
+        <div class="hero-photo-ring"></div>
+        <div class="hero-photo">
+          <img src="assets/foto.jpg" alt="Victor Militino" id="heroImg" style="display:none"
+               onload="this.style.display='block';document.getElementById('heroInitials').style.display='none'"/>
+          <div class="hero-initials" id="heroInitials" style="display:flex">VM</div>
+        </div>
+        <label class="photo-hint" title="Trocar foto">
+          <input type="file" id="photoInput" accept="image/*" style="display:none"/>
+          <span class="photo-hint-icon">&#128247;</span>
+        </label>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>scroll</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SOBRE
+════════════════════════════════════════ -->
+<section class="sec" id="sobre">
+  <div class="container">
+    <div class="about-grid">
+
+      <div class="about-text fade-left">
+        <div class="sec-label" data-i18n="about.label"></div>
+        <div class="sec-title" data-i18n="about.title"></div>
+        <p data-i18n="about.p1"></p>
+        <p data-i18n="about.p2"></p>
+        <p data-i18n="about.p3"></p>
+      </div>
+
+      <div class="stats-grid fade-right">
+        <div class="stat"><div class="stat-n">5+</div><div class="stat-l" data-i18n="about.s1"></div></div>
+        <div class="stat"><div class="stat-n">10+</div><div class="stat-l" data-i18n="about.s2"></div></div>
+        <div class="stat"><div class="stat-n">3</div><div class="stat-l"  data-i18n="about.s3"></div></div>
+        <div class="stat"><div class="stat-n">2x</div><div class="stat-l" data-i18n="about.s4"></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SKILLS
+════════════════════════════════════════ -->
+<section class="sec sec-alt" id="skills">
+  <div class="container">
+    <div class="sec-label fade-up" data-i18n="skills.label"></div>
+    <div class="sec-title fade-up" data-i18n="skills.title"></div>
+
+    <div class="skills-grid">
+      <div class="skill-cat fade-up" style="transition-delay:.00s">
+        <div class="skill-cat-icon">⚡</div>
+        <div class="skill-cat-title" data-i18n="skills.lang"></div>
+        <div class="tags">
+          <span class="tag">Java</span><span class="tag">Python</span>
+          <span class="tag">JavaScript</span><span class="tag">TypeScript</span><span class="tag">SQL</span>
+        </div>
+      </div>
+      <div class="skill-cat fade-up" style="transition-delay:.08s">
+        <div class="skill-cat-icon">🔧</div>
+        <div class="skill-cat-title">Frameworks</div>
+        <div class="tags">
+          <span class="tag">Spring Boot</span><span class="tag">React.js</span>
+          <span class="tag">Node.js</span><span class="tag">Bootstrap</span>
+        </div>
+      </div>
+      <div class="skill-cat devops-focus fade-up" style="transition-delay:.16s">
+        <div class="skill-cat-icon">🛠️</div>
+        <div class="skill-cat-title" data-i18n="skills.devops"></div>
+        <div class="tags">
+          <span class="tag">Docker</span><span class="tag">Kubernetes</span>
+          <span class="tag">Terraform</span><span class="tag">AWS</span>
+          <span class="tag">CI/CD</span><span class="tag">Git</span>
+        </div>
+        <div class="devops-badge" data-i18n="skills.devops.badge"></div>
+      </div>
+      <div class="skill-cat fade-up" style="transition-delay:.24s">
+        <div class="skill-cat-icon">🧪</div>
+        <div class="skill-cat-title" data-i18n="skills.test"></div>
+        <div class="tags">
+          <span class="tag">Selenium</span><span class="tag">Cypress</span>
+          <span class="tag">Python Scripting</span>
+        </div>
+      </div>
+      <div class="skill-cat fade-up" style="transition-delay:.32s">
+        <div class="skill-cat-icon">🗄️</div>
+        <div class="skill-cat-title" data-i18n="skills.db"></div>
+        <div class="tags">
+          <span class="tag">MySQL</span><span class="tag">PostgreSQL</span><span class="tag">MaxDB</span>
+        </div>
+      </div>
+      <div class="skill-cat fade-up" style="transition-delay:.40s">
+        <div class="skill-cat-icon">🎨</div>
+        <div class="skill-cat-title" data-i18n="skills.tools"></div>
+        <div class="tags">
+          <span class="tag">Figma</span><span class="tag">Power BI</span>
+          <span class="tag">Scrum/Kanban</span><span class="tag">VS Code</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     EXPERIÊNCIA
+════════════════════════════════════════ -->
+<section class="sec" id="exp">
+  <div class="container">
+    <div class="sec-label fade-up" data-i18n="exp.label"></div>
+    <div class="sec-title fade-up" data-i18n="exp.title"></div>
+
+    <div class="timeline">
+
+      <!-- Rise-Up -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">FEV 2025 — JUN 2025</div>
+        <div class="tl-company">Residência Porto Digital — Rise-Up</div>
+        <div class="tl-role"  data-i18n="exp.e1.role"></div>
+        <ul class="tl-list">
+          <li data-i18n="exp.e1.l1"></li>
+          <li data-i18n="exp.e1.l2"></li>
+          <li data-i18n="exp.e1.l3"></li>
+          <li data-i18n="exp.e1.l4"></li>
+        </ul>
+        <span class="tl-badge">React · Node.js · Agile</span>
+      </div>
+
+      <!-- Kick-off -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">AGO 2024 — DEZ 2024</div>
+        <div class="tl-company">Residência Porto Digital — Kick-off</div>
+        <div class="tl-role"  data-i18n="exp.e2.role"></div>
+        <ul class="tl-list">
+          <li data-i18n="exp.e2.l1"></li>
+          <li data-i18n="exp.e2.l2"></li>
+        </ul>
+        <span class="tl-badge" data-i18n="exp.e2.badge"></span>
+      </div>
+
+      <!-- Lab Edmar -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">JAN 2019 — MAR 2019</div>
+        <div class="tl-company">Laboratório Edmar Victor</div>
+        <div class="tl-role"  data-i18n="exp.e3.role"></div>
+        <ul class="tl-list">
+          <li data-i18n="exp.e3.l1"></li>
+          <li data-i18n="exp.e3.l2"></li>
+        </ul>
+        <span class="tl-badge">Power BI · MaxDB · Analytics</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     PROJETOS
+════════════════════════════════════════ -->
+<section class="sec sec-alt" id="projetos">
+  <div class="container">
+    <div class="sec-label fade-up" data-i18n="proj.label"></div>
+    <div class="sec-title fade-up" data-i18n="proj.title"></div>
+
+    <div class="proj-filter fade-up">
+      <button class="flt on" onclick="filterProj('all',this)"      data-i18n="proj.f.all"></button>
+      <button class="flt"    onclick="filterProj('personal',this)" data-i18n="proj.f.personal"></button>
+      <button class="flt"    onclick="filterProj('academic',this)" data-i18n="proj.f.academic"></button>
+    </div>
+
+    <div class="proj-grid">
+
+      <!-- AlertaFebre -->
+      <div class="proj-card fade-up" data-cat="personal" style="transition-delay:.00s">
+        <div class="proj-top">
+          <div class="proj-head">
+            <span class="proj-type typ-p" data-i18n="proj.f.personal"></span>
+            <span class="proj-badge">PWA</span>
+          </div>
+          <div class="proj-name">🌡️ AlertaFebre</div>
+          <div class="proj-sub"    data-i18n="proj.p1.sub"></div>
+          <div class="proj-status"><div class="sdot wip"></div><span data-i18n="proj.wip"></span></div>
+          <p class="proj-desc"     data-i18n="proj.p1.desc"></p>
+          <ul class="proj-feats">
+            <li data-i18n="proj.p1.f1"></li>
+            <li data-i18n="proj.p1.f2"></li>
+            <li data-i18n="proj.p1.f3"></li>
+            <li data-i18n="proj.p1.f4"></li>
+            <li data-i18n="proj.p1.f5"></li>
+          </ul>
+        </div>
+        <div class="proj-bottom">
+          <div class="stack">
+            <span class="stag">React JS</span><span class="stag">PWA</span>
+            <span class="stag">Geolocation API</span><span class="stag">JavaScript</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://lnkd.in/d9gE9UWM" target="_blank" class="pl-btn pri" data-i18n="proj.p1.cta"></a>
+            <a href="https://github.com/victormilitino" target="_blank" class="pl-btn sec">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- PsicoPro -->
+      <div class="proj-card fade-up" data-cat="academic" style="transition-delay:.1s">
+        <div class="proj-top">
+          <div class="proj-head">
+            <span class="proj-type typ-a" data-i18n="proj.academic_porto"></span>
+            <span class="proj-badge">🏆 Top 10</span>
+          </div>
+          <div class="proj-name">🧠 PsicoPro</div>
+          <div class="proj-sub"    data-i18n="proj.p2.sub"></div>
+          <div class="proj-status"><div class="sdot"></div><span data-i18n="proj.p2.status"></span></div>
+          <div class="award-box">🏆 <span data-i18n="proj.p2.award"></span></div>
+          <p class="proj-desc"     data-i18n="proj.p2.desc"></p>
+          <ul class="proj-feats">
+            <li data-i18n="proj.p2.f1"></li>
+            <li data-i18n="proj.p2.f2"></li>
+            <li data-i18n="proj.p2.f3"></li>
+            <li data-i18n="proj.p2.f4"></li>
+            <li data-i18n="proj.p2.f5"></li>
+          </ul>
+        </div>
+        <div class="proj-bottom">
+          <div class="stack">
+            <span class="stag">React</span><span class="stag">Node.js</span>
+            <span class="stag">JavaScript</span><span class="stag">Bootstrap</span><span class="stag">Scrum</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/victormilitino" target="_blank" class="pl-btn pri">GitHub →</a>
+            <a href="https://www.linkedin.com/in/victor-militino-3bba811ba/" target="_blank" class="pl-btn sec">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SisOOC -->
+      <div class="proj-card fade-up" data-cat="academic" style="transition-delay:.2s">
+        <div class="proj-top">
+          <div class="proj-head">
+            <span class="proj-type typ-a" data-i18n="proj.f.academic"></span>
+          </div>
+          <div class="proj-name">🚒 SisOOC</div>
+          <div class="proj-sub"    data-i18n="proj.p3.sub"></div>
+          <div class="proj-status"><div class="sdot"></div><span data-i18n="proj.done"></span></div>
+          <p class="proj-desc"     data-i18n="proj.p3.desc"></p>
+          <ul class="proj-feats">
+            <li data-i18n="proj.p3.f1"></li>
+            <li data-i18n="proj.p3.f2"></li>
+            <li data-i18n="proj.p3.f3"></li>
+            <li data-i18n="proj.p3.f4"></li>
+          </ul>
+        </div>
+        <div class="proj-bottom">
+          <div class="stack">
+            <span class="stag">Java</span><span class="stag">Spring Boot</span>
+            <span class="stag">SQL</span><span class="stag">React</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/victormilitino" target="_blank" class="pl-btn pri">GitHub →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     FORMAÇÃO
+════════════════════════════════════════ -->
+<section class="sec" id="formacao">
+  <div class="container">
+    <div class="sec-label fade-up" data-i18n="edu.label"></div>
+    <div class="sec-title fade-up" data-i18n="edu.title"></div>
+
+    <div class="edu-grid">
+      <div class="edu-card fade-up" style="transition-delay:.00s">
+        <div class="edu-type"   data-i18n="edu.c1.type"></div>
+        <div class="edu-name">Faculdade Senac</div>
+        <div class="edu-course" data-i18n="edu.c1.course"></div>
+        <div class="edu-year">2024 – 2026</div>
+      </div>
+      <div class="edu-card fade-up" style="transition-delay:.1s">
+        <div class="edu-type"   data-i18n="edu.c2.type"></div>
+        <div class="edu-name"   data-i18n="edu.c2.name"></div>
+        <div class="edu-course">Yázigi &amp; CNA</div>
+        <div class="edu-year"   data-i18n="edu.c2.year"></div>
+      </div>
+    </div>
+
+    <div class="sec-label fade-up" style="margin-bottom:.85rem" data-i18n="edu.lang"></div>
+    <div class="lang-row fade-up">
+      <div class="lang-card">
+        <div class="lang-nm">🇧🇷 Português</div>
+        <div class="lang-lv" data-i18n="edu.native"></div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-nm">🇺🇸 Inglês / English</div>
+        <div class="lang-lv" data-i18n="edu.intermediate"></div>
+        <div class="lang-sc">Yázigi &amp; CNA</div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-nm">🇪🇸 Espanhol / Spanish</div>
+        <div class="lang-lv" data-i18n="edu.advanced"></div>
+        <div class="lang-sc">Yázigi</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CONTATO
+════════════════════════════════════════ -->
+<section class="sec sec-alt" id="contato">
+  <div class="container">
+    <div class="contact-grid">
+
+      <div class="fade-left">
+        <div class="sec-label" data-i18n="contact.label"></div>
+        <div class="contact-h" data-i18n="contact.title"></div>
+        <p class="contact-sub" data-i18n="contact.sub"></p>
+        <div class="clinks">
+          <a href="mailto:victor.militino@gmail.com" class="cl">
+            <div class="cl-icon">✉</div>victor.militino@gmail.com
+          </a>
+          <a href="https://wa.me/5581997539984" target="_blank" class="cl">
+            <div class="cl-icon">📱</div>(81) 9.9753-9984
+          </a>
+          <a href="https://www.linkedin.com/in/victor-militino-3bba811ba/" target="_blank" class="cl">
+            <div class="cl-icon">in</div>LinkedIn — Victor Militino
+          </a>
+          <a href="https://github.com/victormilitino" target="_blank" class="cl">
+            <div class="cl-icon">GH</div>github.com/victormilitino
+          </a>
+          <span class="cl" style="cursor:default">
+            <div class="cl-icon">📍</div>Recife — PE, Brasil
+          </span>
+        </div>
+      </div>
+
+      <div class="fade-right">
+        <div class="cform">
+          <div class="fg">
+            <label class="flb" data-i18n="contact.fname"></label>
+            <input  class="fi" type="text"  data-i18n-ph="contact.fnameph"/>
+          </div>
+          <div class="fg">
+            <label class="flb">E-mail</label>
+            <input  class="fi" type="email" placeholder="seu@email.com"/>
+          </div>
+          <div class="fg">
+            <label class="flb" data-i18n="contact.fmsg"></label>
+            <textarea class="fta" data-i18n-ph="contact.fmsgph"></textarea>
+          </div>
+          <button class="btn-p" id="sendbtn" style="width:100%;text-align:center" data-i18n="contact.send"></button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer>
+  <span>Victor Militino</span> Santos Gonçalves ·
+  <span data-i18n="footer.role"></span> ·
+  Recife — PE · 2025
+</footer>
+
+<!-- ── Scripts (ordem importa) ── -->
+
+
+<script>
+const i18n = {
+  pt: {
+    'nav.about':   'Sobre',
+    'nav.exp':     'Experiência',
+    'nav.proj':    'Projetos',
+    'nav.edu':     'Formação',
+    'nav.contact': 'Contato',
+
+    'hero.tag':  'Desenvolvedor Fullstack · Porto Digital · Recife',
+    'hero.desc': 'Transformando ideias em soluções digitais com Java, React e Python. Residente no Porto Digital, apaixonado por código limpo e inovação.',
+    'hero.cta1': 'Entre em contato',
+    'hero.cta2': 'Ver projetos',
+
+    'about.label': 'Sobre mim',
+    'about.title': 'Desenvolvedor com <em>propósito</em>',
+    'about.p1': 'Sou <strong>Victor Militino</strong>, desenvolvedor fullstack baseado em Recife — PE, com foco em Java, Spring Boot, React e automação com Python.',
+    'about.p2': 'Atualmente curso <strong>Análise e Desenvolvimento de Sistemas</strong> na Faculdade Senac e participo da <strong>Residência no Porto Digital</strong>, onde desenvolvo soluções reais com equipes multidisciplinares e mentoria técnica do CESAR.',
+    'about.p3': 'Fluente em <strong>espanhol avançado</strong> e <strong>inglês intermediário</strong>, combino comunicação eficaz com execução técnica sólida. Atualmente estou direcionando minha carreira para a área de <strong>DevOps</strong>, com interesse em infraestrutura, automação de pipelines e cultura de entrega contínua.',,
+    'about.s1': 'Anos com tecnologia',
+    'about.s2': 'Tecnologias dominadas',
+    'about.s3': 'Idiomas',
+    'about.s4': 'Residente Porto Digital',
+
+    'skills.label':  'Tecnologias',
+    'skills.title':  'Stack &amp; <em>ferramentas</em>',
+    'skills.lang':   'Linguagens',
+    'skills.devops': 'DevOps &amp; Cloud ✦ foco',
+    'skills.test':   'Testes &amp; Automação',
+    'skills.db':     'Bancos de Dados',
+    'skills.tools':  'Ferramentas',
+    'skills.devops.badge': 'Foco de carreira',
+
+    'exp.label': 'Trajetória',
+    'exp.title': 'Experiência <em>&amp; atuação</em>',
+
+    'exp.e1.role': 'Desenvolvedor Fullstack (Projeto Acadêmico)',
+    'exp.e1.l1':   'Sistema para psicopedagogos com apoio a atendimentos e planejamentos',
+    'exp.e1.l2':   'Equipe multidisciplinar com mentoria técnica do CESAR',
+    'exp.e1.l3':   'Stack: HTML, CSS, React, Node.js, Bootstrap',
+    'exp.e1.l4':   'Scrum/Kanban e versionamento com Git/GitHub',
+
+    'exp.e2.role':  'Desenvolvedor em Inovação Cultural',
+    'exp.e2.l1':    'Plataforma digital voltada para cultura e tecnologia',
+    'exp.e2.l2':    'Projeto de inovação com foco em impacto cultural',
+    'exp.e2.badge': 'Inovação · Cultura Digital',
+
+    'exp.e3.role': 'Desenvolvedor de Dashboards (PJ)',
+    'exp.e3.l1':   'Dashboards com Power BI integrados ao banco MaxDB',
+    'exp.e3.l2':   'Visualização de dados para apoio à tomada de decisão',
+
+    'proj.label':         'Portfólio',
+    'proj.title':         'Projetos <em>em destaque</em>',
+    'proj.f.all':         'Todos',
+    'proj.f.personal':    'Pessoal',
+    'proj.f.academic':    'Acadêmico',
+    'proj.academic_porto':'Acadêmico · Porto Digital',
+    'proj.wip':           'Em desenvolvimento',
+    'proj.done':          'Concluído',
+
+    'proj.p1.sub':  'App de monitoramento de febre &amp; medicação',
+    'proj.p1.desc': 'Aplicação web progressiva para registrar e monitorar quadros de febre e medicação. Surgiu da necessidade de substituir papel e caneta por um histórico confiável no celular.',
+    'proj.p1.f1':   'Registro com nome, temperatura, data e hora automáticas',
+    'proj.p1.f2':   'Controle de medicação com nome do remédio e dosagem',
+    'proj.p1.f3':   'Geolocalização — marca o local exato do registro',
+    'proj.p1.f4':   'Funciona offline e instala como app nativo (PWA)',
+    'proj.p1.f5':   'Em breve: login e histórico multi-paciente',
+    'proj.p1.cta':  'Testar app →',
+
+    'proj.p2.sub':    'Gestão de atendimentos psicopedagógicos',
+    'proj.p2.status': 'Concluído · DemoDay 2025',
+    'proj.p2.award':  'Top 10 entre 53 grupos — Arena do Banco do Brasil, Recife Antigo',
+    'proj.p2.desc':   'Solução desenvolvida com o CESAR para organização e acompanhamento de atendimentos psicopedagógicos. Orientado pelo mentor Felipe Cavalcanti.',
+    'proj.p2.f1': 'Cadastro completo de pacientes',
+    'proj.p2.f2': 'Agenda e controle de atendimentos',
+    'proj.p2.f3': 'Registro de sessões com anotações',
+    'proj.p2.f4': 'Relatórios de acompanhamento do progresso',
+    'proj.p2.f5': 'Área do profissional com visão geral',
+
+    'proj.p3.sub':  'Sistema de gestão para Corpo de Bombeiros',
+    'proj.p3.desc': 'Sistema web acadêmico para gerenciamento de operações do Corpo de Bombeiros — centralizando registros, escalas e histórico de atendimentos em interface digital moderna.',
+    'proj.p3.f1': 'Gestão de ocorrências e chamados',
+    'proj.p3.f2': 'Controle de equipes e escalas operacionais',
+    'proj.p3.f3': 'Histórico digitalizado de atendimentos',
+    'proj.p3.f4': 'Interface otimizada para uso em campo',
+
+    'edu.label':     'Formação',
+    'edu.title':     'Educação &amp; <em>idiomas</em>',
+    'edu.c1.type':   'Graduação · Em andamento',
+    'edu.c1.course': 'Análise e Desenvolvimento de Sistemas',
+    'edu.c2.type':   'Idiomas',
+    'edu.c2.name':   'Inglês &amp; Espanhol',
+    'edu.c2.year':   'Inglês: Intermediário | Espanhol: Avançado',
+    'edu.lang':      'Idiomas',
+    'edu.native':    'Nativo',
+    'edu.advanced':  'Avançado',
+    'edu.intermediate': 'Intermediário',
+
+    'contact.label':   'Vamos conversar',
+    'contact.title':   'Pronto para <span>colaborar?</span>',
+    'contact.sub':     'Estou em busca de oportunidades de estágio ou júnior. Se você tem um projeto ou vaga, adoraria ouvir sobre.',
+    'contact.fname':   'Seu nome',
+    'contact.fnameph': 'Nome completo',
+    'contact.fmsg':    'Mensagem',
+    'contact.fmsgph':  'Olá Victor, tenho uma oportunidade...',
+    'contact.send':    'Enviar mensagem →',
+    'contact.sent':    'Mensagem enviada! ✓',
+
+    'footer.role': 'Desenvolvedor Fullstack',
+  },
+
+  en: {
+    'nav.about':   'About',
+    'nav.exp':     'Experience',
+    'nav.proj':    'Projects',
+    'nav.edu':     'Education',
+    'nav.contact': 'Contact',
+
+    'hero.tag':  'Fullstack Developer · Porto Digital · Recife',
+    'hero.desc': 'Turning ideas into digital solutions with Java, React and Python. Porto Digital resident, passionate about clean code and innovation.',
+    'hero.cta1': 'Get in touch',
+    'hero.cta2': 'See projects',
+
+    'about.label': 'About me',
+    'about.title': 'Developer with <em>purpose</em>',
+    'about.p1': 'I am <strong>Victor Militino</strong>, a fullstack developer based in Recife — PE, focused on Java, Spring Boot, React and Python automation.',
+    'about.p2': 'Currently studying <strong>Systems Analysis and Development</strong> at Faculdade Senac and participating in the <strong>Porto Digital Residency</strong>, developing real solutions with multidisciplinary teams.',
+    'about.p3': 'Fluent in <strong>advanced Spanish</strong> and <strong>intermediate English</strong>, I combine effective communication with solid technical execution. I am currently steering my career toward <strong>DevOps</strong>, with interest in infrastructure, pipeline automation and continuous delivery culture.',,
+    'about.s1': 'Years in tech',
+    'about.s2': 'Technologies mastered',
+    'about.s3': 'Languages',
+    'about.s4': 'Porto Digital Resident',
+
+    'skills.label':  'Technologies',
+    'skills.title':  'Stack &amp; <em>tools</em>',
+    'skills.lang':   'Languages',
+    'skills.devops': 'DevOps &amp; Cloud ✦ foco',
+    'skills.test':   'Testing &amp; Automation',
+    'skills.db':     'Databases',
+    'skills.tools':  'Tools',
+    'skills.devops.badge': 'Career focus',
+
+    'exp.label': 'Journey',
+    'exp.title': 'Experience <em>&amp; work</em>',
+
+    'exp.e1.role': 'Fullstack Developer (Academic Project)',
+    'exp.e1.l1':   'System for educational psychologists supporting appointments and planning',
+    'exp.e1.l2':   'Multidisciplinary team with technical mentoring from CESAR',
+    'exp.e1.l3':   'Stack: HTML, CSS, React, Node.js, Bootstrap',
+    'exp.e1.l4':   'Scrum/Kanban and versioning with Git/GitHub',
+
+    'exp.e2.role':  'Developer in Cultural Innovation',
+    'exp.e2.l1':    'Digital platform focused on culture and technology',
+    'exp.e2.l2':    'Innovation project with cultural impact focus',
+    'exp.e2.badge': 'Innovation · Digital Culture',
+
+    'exp.e3.role': 'Dashboard Developer (Freelance)',
+    'exp.e3.l1':   'Dashboards with Power BI integrated to MaxDB',
+    'exp.e3.l2':   'Data visualization to support decision making',
+
+    'proj.label':         'Portfolio',
+    'proj.title':         'Featured <em>projects</em>',
+    'proj.f.all':         'All',
+    'proj.f.personal':    'Personal',
+    'proj.f.academic':    'Academic',
+    'proj.academic_porto':'Academic · Porto Digital',
+    'proj.wip':           'In development',
+    'proj.done':          'Completed',
+
+    'proj.p1.sub':  'Fever &amp; medication monitoring app',
+    'proj.p1.desc': 'Progressive web app to record and monitor fever and medication simply and digitally. Born from the need to replace pen and paper with a reliable mobile history.',
+    'proj.p1.f1':   'Record with name, temperature, automatic date and time',
+    'proj.p1.f2':   'Medication control with medicine name and dosage',
+    'proj.p1.f3':   'Geolocation — marks the exact location of the record',
+    'proj.p1.f4':   'Works offline and installs as native app (PWA)',
+    'proj.p1.f5':   'Coming soon: login and multi-patient history',
+    'proj.p1.cta':  'Try the app →',
+
+    'proj.p2.sub':    'Psychopedagogical appointment management',
+    'proj.p2.status': 'Completed · DemoDay 2025',
+    'proj.p2.award':  'Top 10 among 53 groups — Banco do Brasil Arena, Recife Antigo',
+    'proj.p2.desc':   'Solution developed with CESAR to solve the difficulty of organizing and tracking psychopedagogical appointments. Mentored by Felipe Cavalcanti.',
+    'proj.p2.f1': 'Complete patient registration',
+    'proj.p2.f2': 'Appointment scheduling and control',
+    'proj.p2.f3': 'Session records with custom notes',
+    'proj.p2.f4': 'Progress tracking reports',
+    'proj.p2.f5': 'Professional area with full overview',
+
+    'proj.p3.sub':  'Fire Department management system',
+    'proj.p3.desc': 'Academic web system for managing Fire Department operations — centralizing records, schedules and attendance history in a modern digital interface.',
+    'proj.p3.f1': 'Incident and call management',
+    'proj.p3.f2': 'Team and operational schedule control',
+    'proj.p3.f3': 'Digitized attendance history',
+    'proj.p3.f4': 'Interface optimized for field use',
+
+    'edu.label':     'Education',
+    'edu.title':     'Education &amp; <em>languages</em>',
+    'edu.c1.type':   'Degree · In progress',
+    'edu.c1.course': 'Systems Analysis and Development',
+    'edu.c2.type':   'Languages',
+    'edu.c2.name':   'English &amp; Spanish',
+    'edu.c2.year':   'English: Intermediate | Spanish: Advanced',
+    'edu.lang':      'Languages',
+    'edu.native':    'Native',
+    'edu.advanced':  'Advanced',
+    'edu.intermediate': 'Intermediate',
+
+    'contact.label':   "Let's talk",
+    'contact.title':   'Ready to <span>collaborate?</span>',
+    'contact.sub':     "I'm looking for internship or junior opportunities. If you have an interesting project or opening, I'd love to hear about it.",
+    'contact.fname':   'Your name',
+    'contact.fnameph': 'Full name',
+    'contact.fmsg':    'Message',
+    'contact.fmsgph':  'Hi Victor, I have an opportunity...',
+    'contact.send':    'Send message →',
+    'contact.sent':    'Message sent! ✓',
+
+    'footer.role': 'Fullstack Developer',
+  },
+
+  es: {
+    'nav.about':   'Sobre mí',
+    'nav.exp':     'Experiencia',
+    'nav.proj':    'Proyectos',
+    'nav.edu':     'Formación',
+    'nav.contact': 'Contacto',
+
+    'hero.tag':  'Desarrollador Fullstack · Porto Digital · Recife',
+    'hero.desc': 'Transformando ideas en soluciones digitales con Java, React y Python. Residente en Porto Digital, apasionado por el código limpio y la innovación.',
+    'hero.cta1': 'Contáctame',
+    'hero.cta2': 'Ver proyectos',
+
+    'about.label': 'Sobre mí',
+    'about.title': 'Desarrollador con <em>propósito</em>',
+    'about.p1': 'Soy <strong>Victor Militino</strong>, desarrollador fullstack con base en Recife — PE, enfocado en Java, Spring Boot, React y automatización con Python.',
+    'about.p2': 'Actualmente estudio <strong>Análisis y Desarrollo de Sistemas</strong> en la Faculdade Senac y participo en la <strong>Residencia de Porto Digital</strong>, desarrollando soluciones reales con equipos multidisciplinarios.',
+    'about.p3': 'Con dominio <strong>avanzado en español</strong> e <strong>inglés intermedio</strong>, combino comunicación efectiva con ejecución técnica sólida. Actualmente estoy orientando mi carrera hacia el área de <strong>DevOps</strong>, con interés en infraestructura, automatización de pipelines y cultura de entrega continua.',,
+    'about.s1': 'Años en tecnología',
+    'about.s2': 'Tecnologías dominadas',
+    'about.s3': 'Idiomas',
+    'about.s4': 'Residente Porto Digital',
+
+    'skills.label':  'Tecnologías',
+    'skills.title':  'Stack &amp; <em>herramientas</em>',
+    'skills.lang':   'Lenguajes',
+    'skills.devops': 'DevOps &amp; Cloud ✦ foco',
+    'skills.test':   'Pruebas &amp; Automatización',
+    'skills.db':     'Bases de datos',
+    'skills.tools':  'Herramientas',
+    'skills.devops.badge': 'Enfoque de carrera',
+
+    'exp.label': 'Trayectoria',
+    'exp.title': 'Experiencia <em>&amp; trabajo</em>',
+
+    'exp.e1.role': 'Desarrollador Fullstack (Proyecto Académico)',
+    'exp.e1.l1':   'Sistema para psicopedagogos con apoyo en atenciones y planificación',
+    'exp.e1.l2':   'Equipo multidisciplinario con mentoría técnica del CESAR',
+    'exp.e1.l3':   'Stack: HTML, CSS, React, Node.js, Bootstrap',
+    'exp.e1.l4':   'Scrum/Kanban y versionamiento con Git/GitHub',
+
+    'exp.e2.role':  'Desarrollador en Innovación Cultural',
+    'exp.e2.l1':    'Plataforma digital orientada a cultura y tecnología',
+    'exp.e2.l2':    'Proyecto de innovación con foco en impacto cultural',
+    'exp.e2.badge': 'Innovación · Cultura Digital',
+
+    'exp.e3.role': 'Desarrollador de Dashboards (Freelance)',
+    'exp.e3.l1':   'Dashboards con Power BI integrados a MaxDB',
+    'exp.e3.l2':   'Visualización de datos para apoyo en toma de decisiones',
+
+    'proj.label':         'Portafolio',
+    'proj.title':         'Proyectos <em>destacados</em>',
+    'proj.f.all':         'Todos',
+    'proj.f.personal':    'Personal',
+    'proj.f.academic':    'Académico',
+    'proj.academic_porto':'Académico · Porto Digital',
+    'proj.wip':           'En desarrollo',
+    'proj.done':          'Completado',
+
+    'proj.p1.sub':  'App de monitoreo de fiebre &amp; medicación',
+    'proj.p1.desc': 'Aplicación web progresiva para registrar y monitorear cuadros de fiebre y medicación. Surgió de la necesidad de reemplazar papel y lápiz por un historial digital confiable en el celular.',
+    'proj.p1.f1':   'Registro con nombre, temperatura, fecha y hora automáticas',
+    'proj.p1.f2':   'Control de medicación con nombre del medicamento y dosis',
+    'proj.p1.f3':   'Geolocalización — marca el lugar exacto del registro',
+    'proj.p1.f4':   'Funciona sin conexión e instala como app nativa (PWA)',
+    'proj.p1.f5':   'Próximamente: login e historial multi-paciente',
+    'proj.p1.cta':  'Probar la app →',
+
+    'proj.p2.sub':    'Gestión de atenciones psicopedagógicas',
+    'proj.p2.status': 'Completado · DemoDay 2025',
+    'proj.p2.award':  'Top 10 entre 53 grupos — Arena del Banco do Brasil, Recife Antiguo',
+    'proj.p2.desc':   'Solución desarrollada con CESAR para la organización y seguimiento de atenciones psicopedagógicas. Orientado por el mentor Felipe Cavalcanti.',
+    'proj.p2.f1': 'Registro completo de pacientes',
+    'proj.p2.f2': 'Agenda y control de atenciones',
+    'proj.p2.f3': 'Registro de sesiones con anotaciones',
+    'proj.p2.f4': 'Informes de seguimiento del progreso',
+    'proj.p2.f5': 'Área del profesional con visión general',
+
+    'proj.p3.sub':  'Sistema de gestión para Bomberos',
+    'proj.p3.desc': 'Sistema web académico para gestión de operaciones del Cuerpo de Bomberos — centralizando registros, turnos e historial de atenciones en una interfaz digital moderna.',
+    'proj.p3.f1': 'Gestión de incidentes y llamadas',
+    'proj.p3.f2': 'Control de equipos y turnos operativos',
+    'proj.p3.f3': 'Historial digitalizado de atenciones',
+    'proj.p3.f4': 'Interfaz optimizada para uso en campo',
+
+    'edu.label':     'Formación',
+    'edu.title':     'Educación &amp; <em>idiomas</em>',
+    'edu.c1.type':   'Grado · En curso',
+    'edu.c1.course': 'Análisis y Desarrollo de Sistemas',
+    'edu.c2.type':   'Idiomas',
+    'edu.c2.name':   'Inglés &amp; Español',
+    'edu.c2.year':   'Inglés: Intermedio | Español: Avanzado',
+    'edu.lang':      'Idiomas',
+    'edu.native':    'Nativo',
+    'edu.advanced':  'Avanzado',
+    'edu.intermediate': 'Intermedio',
+
+    'contact.label':   'Hablemos',
+    'contact.title':   '¿Listo para <span>colaborar?</span>',
+    'contact.sub':     'Estoy buscando oportunidades de pasantía o junior. Si tienes un proyecto interesante o una vacante, me encantaría escucharte.',
+    'contact.fname':   'Tu nombre',
+    'contact.fnameph': 'Nombre completo',
+    'contact.fmsg':    'Mensaje',
+    'contact.fmsgph':  'Hola Victor, tengo una oportunidad...',
+    'contact.send':    'Enviar mensaje →',
+    'contact.sent':    '¡Mensaje enviado! ✓',
+
+    'footer.role': 'Desarrollador Fullstack',
+  }
+};
+
+
+/* =========================================
+   portfolio · Victor Militino
+   js/lang.js
+   — depende de: data/i18n.js
+   ========================================= */
+
+const roles = {
+  pt: ['Desenvolvedor Fullstack', 'Engenheiro de Automação', 'Residente Porto Digital', 'Solucionador de Problemas'],
+  en: ['Fullstack Developer',     'Automation Engineer',    'Porto Digital Resident',  'Problem Solver'],
+  es: ['Desarrollador Fullstack', 'Ingeniero de Automatización', 'Residente Porto Digital', 'Solucionador de Problemas'],
+};
+
+let curLang    = 'pt';
+let ri = 0, ci = 0, deleting = false, typeTimer = null;
+
+/* ── Typing effect ── */
+function typeRole() {
+  const words = roles[curLang];
+  const word  = words[ri];
+  const el    = document.getElementById('hrole');
+  if (!el) return;
+
+  if (!deleting) {
+    el.textContent = word.slice(0, ++ci);
+    if (ci === word.length) {
+      deleting = true;
+      typeTimer = setTimeout(typeRole, 1800);
+      return;
+    }
+  } else {
+    el.textContent = word.slice(0, --ci);
+    if (ci === 0) {
+      deleting = false;
+      ri = (ri + 1) % words.length;
+    }
+  }
+  typeTimer = setTimeout(typeRole, deleting ? 45 : 80);
+}
+
+/* ── Apply translations ── */
+function applyLang(lang) {
+  const t = i18n[lang];
+  if (!t) return;
+
+  // text content / innerHTML
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+
+  // placeholder attributes
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const key = el.dataset.i18nPh;
+    if (t[key] !== undefined) el.placeholder = t[key];
+  });
+
+  // send button original text
+  const sendBtn = document.getElementById('sendbtn');
+  if (sendBtn) {
+    sendBtn.textContent    = t['contact.send'] || sendBtn.textContent;
+    sendBtn.dataset.orig   = t['contact.send'];
+    sendBtn.style.background = '';
+  }
+}
+
+/* ── Public: change language ── */
+function setLang(lang) {
+  curLang = lang;
+
+  // toggle active button
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+
+  applyLang(lang);
+
+  // restart typing
+  ri = 0; ci = 0; deleting = false;
+  if (typeTimer) clearTimeout(typeTimer);
+  typeRole();
+}
+
+/* ── Boot ── */
+document.addEventListener('DOMContentLoaded', () => {
+  // wire lang buttons
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => setLang(btn.dataset.lang));
+  });
+
+  setLang('pt');
+});
+
+
+/* =========================================
+   portfolio · Victor Militino
+   js/main.js
+   ========================================= */
+
+/* ── Cursor ── */
+(function initCursor() {
+  const cur  = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  if (!cur || !ring) return;
+
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+  (function animate() {
+    cur.style.left = mx + 'px';
+    cur.style.top  = my + 'px';
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(animate);
+  })();
+
+  document.querySelectorAll('a, button, .tag, .stat, .proj-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cur.style.transform  = 'translate(-50%,-50%) scale(2)';
+      ring.style.width     = '56px';
+      ring.style.height    = '56px';
+      ring.style.opacity   = '0.3';
+    });
+    el.addEventListener('mouseleave', () => {
+      cur.style.transform  = 'translate(-50%,-50%) scale(1)';
+      ring.style.width     = '36px';
+      ring.style.height    = '36px';
+      ring.style.opacity   = '0.5';
+    });
+  });
+})();
+
+/* ── Scroll animations (IntersectionObserver) ── */
+(function initScrollAnim() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-up, .fade-left, .fade-right, .tl-item').forEach((el, i) => {
+    if (el.classList.contains('tl-item')) {
+      el.style.transitionDelay = (i * 0.12) + 's';
+    }
+    obs.observe(el);
+  });
+})();
+
+/* ── Nav: darken on scroll ── */
+(function initNav() {
+  const nav = document.querySelector('.pnav');
+  if (!nav) return;
+  window.addEventListener('scroll', () => {
+    nav.style.background = window.scrollY > 60
+      ? 'rgba(10,10,15,0.97)'
+      : 'rgba(10,10,15,0.92)';
+  });
+})();
+
+/* ── Hero parallax orbs on mouse ── */
+(function initParallax() {
+  const orb1 = document.querySelector('.orb1');
+  const orb2 = document.querySelector('.orb2');
+  if (!orb1 || !orb2) return;
+  document.addEventListener('mousemove', e => {
+    const x = (e.clientX / window.innerWidth  - 0.5) * 28;
+    const y = (e.clientY / window.innerHeight - 0.5) * 28;
+    orb1.style.transform = `translate(${x}px, ${y}px)`;
+    orb2.style.transform = `translate(${-x * 0.6}px, ${-y * 0.6}px)`;
+  });
+})();
+
+/* ── Project filter ── */
+function filterProj(cat, btn) {
+  document.querySelectorAll('.flt').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.proj-card').forEach(c => {
+    c.style.display = (cat === 'all' || c.dataset.cat === cat) ? 'flex' : 'none';
+  });
+}
+
+/* ── Contact form feedback ── */
+(function initForm() {
+  const btn = document.getElementById('sendbtn');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    const sent = (typeof i18n !== 'undefined' && i18n[curLang])
+      ? i18n[curLang]['contact.sent']
+      : 'Enviado! ✓';
+    const orig = btn.dataset.orig || btn.textContent;
+    btn.dataset.orig = orig;
+    btn.textContent   = sent;
+    btn.style.background = '#2dd4bf';
+    setTimeout(() => {
+      btn.textContent      = orig;
+      btn.style.background = '';
+    }, 3000);
+  });
+})();
+
+
+
+  (function() {
+    var input = document.getElementById('photoInput');
+    var img   = document.getElementById('heroImg');
+    var init  = document.getElementById('heroInitials');
+    if (input) {
+      input.addEventListener('change', function() {
+        var file = this.files[0];
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          if (img) { img.src = e.target.result; img.style.display = 'block'; }
+          if (init) init.style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+    var label = document.querySelector('.photo-hint');
+    if (label && input) {
+      label.addEventListener('click', function(e) {
+        e.preventDefault();
+        input.click();
+      });
+    }
+  })();
+
+</script>
+</body>
+</html>

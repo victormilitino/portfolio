@@ -1,0 +1,203 @@
+/* =========================================
+   portfolio · Victor Militino
+   css/style.css
+   ========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,500;0,9..40,600;1,9..40,300&display=swap');
+
+/* ── Reset & Tokens ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --a:   #7c6aff;
+  --a2:  #ff6b8a;
+  --a3:  #2dd4bf;
+  --t:   #e8e6ff;
+  --t2:  #9b97c0;
+  --bg:  #0a0a0f;
+  --bg2: #12121a;
+  --bg3: #1a1a26;
+  --bd:  rgba(124, 106, 255, 0.18);
+  --glow:rgba(124, 106, 255, 0.25);
+  --mono: 'Space Mono', monospace;
+  --sans: 'DM Sans', sans-serif;
+}
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--t);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── Custom Cursor ── */
+#cursor {
+  width: 12px; height: 12px;
+  background: var(--a);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform .15s ease, opacity .3s;
+}
+#cursor-ring {
+  width: 36px; height: 36px;
+  border: 1.5px solid var(--a);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform .35s ease, width .3s, height .3s, opacity .3s;
+  opacity: 0.5;
+}
+@media (max-width: 768px) {
+  body { cursor: auto; }
+  #cursor, #cursor-ring { display: none; }
+}
+
+/* ── Nav ── */
+.pnav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1rem 2rem;
+  background: rgba(10, 10, 15, 0.92);
+  border-bottom: 1px solid var(--bd);
+  position: sticky; top: 0;
+  z-index: 100;
+  backdrop-filter: blur(16px);
+  transition: background .3s;
+}
+.pnav-logo {
+  font-family: var(--mono);
+  color: var(--a);
+  font-size: .9rem;
+}
+.pnav-right { display: flex; align-items: center; gap: 1.75rem; }
+.pnav-links { display: flex; gap: 1.5rem; list-style: none; }
+.pnav-links a {
+  color: var(--t2);
+  text-decoration: none;
+  font-size: .8rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  transition: color .2s;
+  position: relative;
+}
+.pnav-links a::after {
+  content: '';
+  position: absolute; bottom: -4px; left: 0; right: 0;
+  height: 1px;
+  background: var(--a);
+  transform: scaleX(0);
+  transition: transform .3s;
+  transform-origin: left;
+}
+.pnav-links a:hover { color: var(--t); }
+.pnav-links a:hover::after { transform: scaleX(1); }
+
+/* Language switcher */
+.lang-switcher { display: flex; gap: 4px; }
+.lang-btn {
+  padding: .3rem .55rem;
+  background: transparent;
+  border: 1px solid var(--bd);
+  color: var(--t2);
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .06em;
+  cursor: pointer;
+  transition: all .2s;
+  line-height: 1;
+}
+.lang-btn:hover { border-color: var(--a); color: var(--a); }
+.lang-btn.active {
+  background: rgba(124, 106, 255, .15);
+  border-color: var(--a);
+  color: var(--a);
+}
+
+/* ── Layout Helpers ── */
+.sec { padding: 5rem 2rem; }
+.sec-alt { background: var(--bg2); }
+.container { max-width: 1060px; margin: 0 auto; }
+
+.sec-label {
+  font-family: var(--mono);
+  font-size: .72rem;
+  color: var(--a);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  margin-bottom: .6rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.sec-label::before { content: '//'; opacity: .5; }
+
+.sec-title {
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 600;
+  letter-spacing: -.02em;
+  line-height: 1.1;
+  margin-bottom: 2.5rem;
+}
+.sec-title em { font-style: italic; font-weight: 300; color: var(--t2); }
+
+/* ── Scroll Animations ── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .65s ease, transform .65s ease;
+}
+.fade-left {
+  opacity: 0;
+  transform: translateX(-28px);
+  transition: opacity .65s ease, transform .65s ease;
+}
+.fade-right {
+  opacity: 0;
+  transform: translateX(28px);
+  transition: opacity .65s ease, transform .65s ease;
+}
+.fade-up.visible,
+.fade-left.visible,
+.fade-right.visible { opacity: 1; transform: none; }
+
+/* ── Buttons ── */
+.btn-p {
+  padding: .75rem 1.75rem;
+  background: var(--a);
+  color: #fff;
+  border: none;
+  font-family: var(--mono);
+  font-size: .78rem;
+  letter-spacing: .08em;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all .2s;
+}
+.btn-p:hover { background: #9b8fff; transform: translateY(-2px); box-shadow: 0 8px 28px var(--glow); }
+.btn-o {
+  padding: .75rem 1.75rem;
+  background: transparent;
+  color: var(--t);
+  border: 1px solid var(--bd);
+  font-family: var(--mono);
+  font-size: .78rem;
+  letter-spacing: .08em;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all .2s;
+}
+.btn-o:hover { border-color: var(--a); color: var(--a); transform: translateY(-2px); }
+
+@media (max-width: 768px) {
+  .pnav-links { display: none; }
+}
